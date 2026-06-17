@@ -2,10 +2,10 @@ import SwiftUI
 
 struct AnotherInputTransactionView: View {
     @State private var selectedCategory: CategoryModel?
-    @State private var date = Date()
     @State private var showDatePicker = false
     @State private var inputNote: String = ""
-    @State var tvm: TransactionViewModel
+    @Bindable var tvm: TransactionViewModel
+
     
     var body: some View {
         VStack (spacing: 24) {
@@ -45,7 +45,7 @@ struct AnotherInputTransactionView: View {
                         .foregroundStyle(.secondary)
 
                     Text(
-                        date.formatted(
+                        tvm.date.formatted(
                             .dateTime.day().month(.wide).year()
                         )
                     )
@@ -55,7 +55,7 @@ struct AnotherInputTransactionView: View {
                     VStack {
                         DatePicker(
                             "Pilih Tanggal",
-                            selection: $date,
+                            selection: $tvm.date,
                             displayedComponents: .date
                         )
                         .datePickerStyle(.graphical)

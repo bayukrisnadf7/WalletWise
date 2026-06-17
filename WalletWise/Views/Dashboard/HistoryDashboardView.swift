@@ -1,129 +1,100 @@
 import SwiftUI
+import SwiftData
 
-
-public struct HistoryHomeView: View {
+public struct HistoryDashboardView: View {
     @EnvironmentObject var router: AppRouter
+    
+    // propery from swift data to get data and this data have to sortir
+    @Query(
+        sort: \TransactionModel.transactionDate,
+        order: .reverse
+    )
+    private var transactions: [TransactionModel]
+    
+    // this function used to get data from transaction model just get 3 data
+    private var latestTransactions: [TransactionModel] {
+        Array(transactions.prefix(3))
+    }
     
     public var body: some View {
         VStack (spacing: 20) {
             HStack {
-                Text ("Riwayat Terbaru")
+                Text ("Latest Transactions")
                     .font(Font.title3.bold())
                 
                 Spacer()
                 
                 Button {
-                    router.homePath.append(HomeRoute.allTransactions)
+                    router.dashboardPath.append(DashboardRoute.allTransactions)
                 } label: {
-                    Text ("Lihat Semua")
+                    Text ("More")
                         .foregroundStyle(Color("PrimaryBlue"))
                         .font(Font.subheadline)
                 }
                 
             }
-            
-            ScrollView {
-                VStack (alignment: .leading, spacing: 12) {
-                    Button {
-                        router.homePath.append(HomeRoute.transactionDetail(id: UUID()))
-                    } label: {
-                        HStack {
-                            Image(systemName: "fork.knife")
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.gray.opacity(0.2))
+            if !latestTransactions.isEmpty {
+                VStack(alignment: .leading, spacing: 16) {
+                    ForEach(Array(latestTransactions.enumerated()), id: \.element.id) { index, transaction in
+                        let color = ColorCategoryHelper.color(for: transaction.category)
+                        Button {
+                            router.dashboardPath.append(
+                                DashboardRoute.transactionDetail(id: transaction.id)
+                            )
+                            
+                        } label: {
+                            
+                            HStack (spacing: 12) {
+                                
+                                Image(systemName: CategoryHelper.icon(for: transaction.category))
+                                    .padding(10)
+                                    .background(
+                                        Circle()
+                                            .fill(color.opacity(0.1))
+                                    )
+                                    .foregroundStyle(color)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    
+                                    Text(transaction.category)
+                                        .font(.headline.bold())
+                                    
+                                    Text (transaction.note)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                    
+                                    Text(
+                                        transaction.transactionDate.formatted(
+                                            date: .abbreviated,
+                                            time: .shortened
+                                        )
+                                    )
+                                    .font(.caption)
+                                    .foregroundStyle(.gray)
+                                }
+                                
+                                Spacer()
+                                
+                                Text(
+                                    "-\(transaction.amount.formatted(.currency(code: "IDR")))"
                                 )
-                                .foregroundStyle(Color("PrimaryBlue"))
-                            
-                            VStack (alignment: .leading) {
-                                Text("Makan Siang")
-                                    .font(.headline.bold())
-                                
-                                Text("Hari Ini 12:45")
-                                    .font(.subheadline)
-                                    .foregroundStyle(Color.gray)
+                                .foregroundStyle(.red)
+                                .font(.headline.bold())
                             }
-                            
-                            Spacer()
-                            
-                            Text ("-Rp. 12.000")
-                                .foregroundStyle(Color.red)
-                                .font(.headline.bold())
-                                
-                        }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
-                        
-                    }
-                    
-                    HStack {
-                        Image(systemName: "fork.knife")
                             .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.gray.opacity(0.2))
-                            )
-                            .foregroundStyle(Color("PrimaryBlue"))
-                        
-                        VStack (alignment: .leading) {
-                            Text("Makan Siang")
-                                .font(.headline.bold())
-                            
-                            Text("Hari Ini 12:45")
-                                .font(.subheadline)
-                                .foregroundStyle(Color.gray)
+                            .cardStyle()
                         }
-                        
-                        Spacer()
-                        
-                        Text ("-Rp. 12.000")
-                            .foregroundStyle(Color.red)
-                            .font(.headline.bold())
-                            
+                        .buttonStyle(.plain)
                     }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
-                    
-                    HStack {
-                        Image(systemName: "fork.knife")
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.gray.opacity(0.2))
-                            )
-                            .foregroundStyle(Color("PrimaryBlue"))
-                        
-                        VStack (alignment: .leading) {
-                            Text("Makan Siang")
-                                .font(.headline.bold())
-                            
-                            Text("Hari Ini 12:45")
-                                .font(.subheadline)
-                                .foregroundStyle(Color.gray)
-                        }
-                        
-                        Spacer()
-                        
-                        Text ("-Rp. 12.000")
-                            .foregroundStyle(Color.red)
-                            .font(.headline.bold())
-                            
-                    }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
-                    
-                    
-                    
-                    
+                }
+            } else {
+                ContentUnavailableView {
+                    Label("No data available", systemImage: "magnifyingglass")
+                        .font(.title3)
+                        .foregroundStyle(Color.secondary)
                 }
             }
             
-            
         }
     }
-}
-
-#Preview {
-    HistoryHomeView()
 }

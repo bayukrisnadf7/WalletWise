@@ -1,7 +1,9 @@
-//
-//  IconHelper.swift
-//  WalletWise
-//
-//  Created by Bayu Krisna Dwihadi Fahrizal on 14/06/26.
-//
+import Foundation
 
+struct CategoryHelper {
+    static func icon(for category: String) -> String {
+        CategoryModel.categories.first {
+            $0.title == category
+        }?.icon ?? "questionmark.circle"
+    }
+}

@@ -1,11 +1,18 @@
 import SwiftUI
 
 
-struct HomeNavigation: ViewModifier {
+struct DashboardNavigation: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .navigationDestination(for: HomeRoute.self) { route in
+            .navigationDestination(for: DashboardRoute.self) { route in
                 switch route {
+                
+                case .addTransaction:
+                    TransactionView()
+                    
+                case .editTransaction(id: let id):
+                    TransactionEditView(id: id)
+                    
                 case .allTransactions:
                     HistoryTransactionView()
                     
@@ -22,7 +29,7 @@ struct HomeNavigation: ViewModifier {
 
 
 extension View {
-    func homeNavigation() -> some View {
-        modifier(HomeNavigation())
+    func dashboardNavigation() -> some View {
+        modifier(DashboardNavigation())
     }
 }

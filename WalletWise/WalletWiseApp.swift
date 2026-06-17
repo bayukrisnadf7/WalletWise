@@ -1,32 +1,30 @@
-//
-//  WalletWiseApp.swift
-//  WalletWise
-//
-//  Created by Bayu Krisna Dwihadi Fahrizal on 09/06/26.
-//
-
 import SwiftUI
 import SwiftData
 
 @main
 struct WalletWiseApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @StateObject private var router = AppRouter()
+    @State private var showSplash = true
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                if showSplash {
+                    SplashView()
+                } else {
+                    MainTabView()
+                }
+            }
+            .environmentObject(router)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation(.easeInOut) {
+                        showSplash = false
+                    }
+                }
+            }
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(for: TransactionModel.self)
     }
 }

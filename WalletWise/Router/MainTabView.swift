@@ -17,7 +17,11 @@ struct MainTabView: View {
             }
             .tag(AppTab.dashboard)
             
-            EducationView().tabItem {
+            NavigationStack (path: $router.educationPath){
+                EducationView()
+                    .educationNavigation()
+            }
+            .tabItem {
                 Label("Education", systemImage: "book")
             }
             .tag(AppTab.education)

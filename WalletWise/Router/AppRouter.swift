@@ -2,19 +2,19 @@ import SwiftUI
 import Combine
 
 // Mark Tabview
-
 enum AppTab {
-    case home
+    case dashboard
     case transaction
     case education
 }
 
 // Mark Route
-
-enum HomeRoute: Hashable {
+enum DashboardRoute: Hashable {
     case allTransactions
     case transactionDetail(id: UUID)
     case statistics
+    case addTransaction
+    case editTransaction(id: UUID)
 }
 
 enum TransactionRoute: Hashable {
@@ -28,9 +28,9 @@ enum EducationRoute: Hashable {
 
 @MainActor
 final class AppRouter: ObservableObject {
-    @Published var selectedTab: AppTab = .home
+    @Published var selectedTab: AppTab = .dashboard
     
-    @Published var homePath = NavigationPath()
+    @Published var dashboardPath = NavigationPath()
     @Published var transactionPath = NavigationPath()
     @Published var educationPath = NavigationPath()
     

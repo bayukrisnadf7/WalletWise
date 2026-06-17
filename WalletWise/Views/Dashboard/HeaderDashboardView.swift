@@ -1,7 +1,9 @@
 import SwiftUI
 
 
-public struct HeaderHomeView: View {
+public struct HeaderDashboardView: View {
+    @EnvironmentObject var router: AppRouter
+    
     public var body: some View {
         HStack {
             Text("Wallet Wise")
@@ -10,13 +12,21 @@ public struct HeaderHomeView: View {
             
             Spacer()
             
-//            Image("logo")
-//                .resizable()
-//                .frame(width: 55, height: 55)
+            Button {
+                router.dashboardPath.append(DashboardRoute.addTransaction)
+            } label: {
+                Image(systemName: "plus")
+                    .font(.title.bold())
+                    .frame(width: 40, height: 40)
+                    .foregroundStyle(Color.primaryBlue)
+            }
+            .buttonStyle(.glass)
+            
         }
     }
 }
 
 #Preview {
-    HeaderHomeView()
+    HeaderDashboardView()
 }
+

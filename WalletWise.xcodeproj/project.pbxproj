@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		51157ABA2FD7EF67001CFA62 /* WalletWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5168451E2FD9487800A4B7ED /* WalletWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		51157ABC2FD7EF67001CFA62 /* WalletWise */ = {
+		51157B782FD8600C001CFA62 /* WalletWise */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = WalletWise;
 			sourceTree = "<group>";
@@ -32,17 +32,9 @@
 		51157AB12FD7EF67001CFA62 = {
 			isa = PBXGroup;
 			children = (
-				51157ABC2FD7EF67001CFA62 /* WalletWise */,
-				51157ABB2FD7EF67001CFA62 /* Products */,
+				51157B782FD8600C001CFA62 /* WalletWise */,
+				5168451E2FD9487800A4B7ED /* WalletWise.app */,
 			);
-			sourceTree = "<group>";
-		};
-		51157ABB2FD7EF67001CFA62 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				51157ABA2FD7EF67001CFA62 /* WalletWise.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,13 +53,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				51157ABC2FD7EF67001CFA62 /* WalletWise */,
+				51157B782FD8600C001CFA62 /* WalletWise */,
 			);
 			name = WalletWise;
 			packageProductDependencies = (
 			);
 			productName = WalletWise;
-			productReference = 51157ABA2FD7EF67001CFA62 /* WalletWise.app */;
+			productReference = 5168451E2FD9487800A4B7ED /* WalletWise.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -95,7 +87,7 @@
 			mainGroup = 51157AB12FD7EF67001CFA62;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 51157ABB2FD7EF67001CFA62 /* Products */;
+			productRefGroup = 51157AB12FD7EF67001CFA62;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -261,6 +253,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,6 +286,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
